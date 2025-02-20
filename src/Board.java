@@ -27,6 +27,14 @@ public class Board {
         return this.grid;
     }
 
+    public boolean isSolutionValid(){
+        for (int i = 0; i< height; i++){
+            for (int j = 0; j < width; j++){
+                if (grid[i][j] == 'X') return false;
+            }
+        }
+        return true;
+    }
     public void printBoard() {
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
@@ -63,7 +71,6 @@ public class Board {
             case 'U': return "\u001B[42m\u001B[37m"; // Green Background, White Text
             case 'V': return "\u001B[43m\u001B[37m"; // Yellow Background, White Text
             case 'W': return "\u001B[44m\u001B[37m"; // Blue Background, White Text
-            case 'X': return "\u001B[45m\u001B[37m"; // Magenta Background, White Text
             case 'Y': return "\u001B[46m\u001B[37m"; // Cyan Background, White Text
             case 'Z': return "\u001B[47m\u001B[30m"; // White Background, Black Text
             default:  return "\u001B[37m"; // White
