@@ -88,23 +88,41 @@ class Piece {
 
 public class Puzzle {
     public static List<Piece> parsePieces(List<String> inputLines) {
-        List<Piece> pieces = new ArrayList<>();
-        Map<Character, List<String>> pieceMap = new LinkedHashMap<>();
+    List<Piece> pieces = new ArrayList<>();
+    Map<Character, List<String>> pieceMap = new LinkedHashMap<>();
 
-        for (String line : inputLines) {
-            if (line.isEmpty()) continue;
-            
-            char lineId = line.charAt(0);
+    Character currentPieceId = null;
 
-            pieceMap.putIfAbsent(lineId, new ArrayList<>());
-            pieceMap.get(lineId).add(line);
+    for (String line : inputLines) {
+        if (line.isBlank()) {
+            // Preserve empty lines inside current piece
+            if (currentPieceId != null) {
+                pieceMap.get(currentPieceId).add(line);
+            }
+            continue;
         }
 
-        for (Map.Entry<Character, List<String>> entry : pieceMap.entrySet()) {
-            pieces.add(new Piece(entry.getKey(), entry.getValue()));
+        // Find the first non-space character (piece ID)
+        for (char c : line.toCharArray()) {
+            if (c != ' ') {
+                currentPieceId = c; // Update current piece ID
+                break;
+            }
         }
-        return pieces;
+
+        // Ensure the piece ID is set
+        if (currentPieceId != null) {
+            pieceMap.putIfAbsent(currentPieceId, new ArrayList<>());
+            pieceMap.get(currentPieceId).add(line);
+        }
     }
+
+    // Convert to Piece objects
+    for (Map.Entry<Character, List<String>> entry : pieceMap.entrySet()) {
+        pieces.add(new Piece(entry.getKey(), entry.getValue()));
+    }
+    return pieces;
+}
 
     public static boolean isValid(List<Piece> inputpiece, int P){
         int size = inputpiece.size();
