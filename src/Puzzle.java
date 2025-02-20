@@ -106,6 +106,20 @@ public class Puzzle {
         return pieces;
     }
 
+    public static boolean isValid(List<Piece> inputpiece, int P){
+        int size = inputpiece.size();
+        if (size == P) {
+            return true;
+        }
+        if (size < P){
+            System.out.println(P + " pieces are required but only " + size + " is given.");
+        }
+        else{
+            System.out.println("Pieces out of bounds. Only " + P + " pieces required but " + size + " is given.");
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         String fileName = "./test/shape.txt"; // File path
         List<String> inputLines = new ArrayList<>();
