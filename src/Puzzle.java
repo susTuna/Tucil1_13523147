@@ -59,6 +59,23 @@ class Piece {
         return new Piece(this.id, newShape);
     }
 
+    public Piece flipVertical() {
+        char[][] original = getShapeArray();
+        int rows = original.length;
+        int cols = original[0].length;
+        char[][] flipped = new char[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            flipped[rows - 1 - i] = original[i];
+        }
+
+        List<String> newShape = new ArrayList<>();
+        for (char[] row : flipped) {
+            newShape.add(new String(row));
+        }
+        return new Piece(this.id, newShape);
+    }
+
     public void printPiece() {
         System.out.println("Piece ID: " + id);
         char[][] shapeArray = getShapeArray();
