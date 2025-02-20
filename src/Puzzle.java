@@ -95,29 +95,25 @@ public class Puzzle {
 
     for (String line : inputLines) {
         if (line.isBlank()) {
-            // Preserve empty lines inside current piece
             if (currentPieceId != null) {
                 pieceMap.get(currentPieceId).add(line);
             }
             continue;
         }
 
-        // Find the first non-space character (piece ID)
         for (char c : line.toCharArray()) {
             if (c != ' ') {
-                currentPieceId = c; // Update current piece ID
+                currentPieceId = c;
                 break;
             }
         }
 
-        // Ensure the piece ID is set
         if (currentPieceId != null) {
             pieceMap.putIfAbsent(currentPieceId, new ArrayList<>());
             pieceMap.get(currentPieceId).add(line);
         }
     }
 
-    // Convert to Piece objects
     for (Map.Entry<Character, List<String>> entry : pieceMap.entrySet()) {
         pieces.add(new Piece(entry.getKey(), entry.getValue()));
     }
