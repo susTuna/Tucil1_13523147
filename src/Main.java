@@ -35,7 +35,7 @@ public class Main {
             long endTime = System.nanoTime();
             double elapsedTimeMs = (endTime - startTime) / 1_000_000.0; // Convert to milliseconds
 
-            if (solutionFound) {
+            if (solutionFound && board.isSolutionValid()) {
                 System.out.println("Solution found:");
                 solver.printSolution();
             } else {
