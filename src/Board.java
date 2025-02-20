@@ -14,6 +14,18 @@ public class Board {
         }
     }
 
+    public int getHeight(){
+        return this.height;
+    }
+
+    public int getWidth(){
+        return this.width;
+    }
+
+    public char[][] getGrid(){
+        return this.grid;
+    }
+    
     public void printBoard(){
         for (int i = 0; i < height; i++){
             for (int j = 0; j < width; j++){
