@@ -4,7 +4,7 @@ import java.io.*;
 public class BruteForceAlgorithm {
     private Board board;
     private List<Piece> pieces;
-    private int visited = 0; // Counter
+    public int visited = 0; // Counter
 
     public BruteForceAlgorithm(Board board, List<Piece> pieces) {
         this.board = board;
