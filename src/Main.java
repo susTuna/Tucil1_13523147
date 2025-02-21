@@ -24,7 +24,7 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 
-public class MainGUI extends Application {
+public class Main extends Application {
     private TextArea boardDisplay;
     private Board board;
     private List<Piece> pieces;
