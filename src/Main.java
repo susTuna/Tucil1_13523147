@@ -39,6 +39,7 @@ public class Main {
                 System.out.println("Solution found:");
                 solver.printSolution();
             } else {
+                
                 System.out.println("No solution found.");
             }
 
