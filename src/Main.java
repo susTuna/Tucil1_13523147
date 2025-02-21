@@ -90,8 +90,10 @@ public class Main extends Application {
                 }
                 
                 pieces = Puzzle.parsePieces(inputLines);
-                if (!Puzzle.isValid(pieces, P)) return;
-
+                if (!Puzzle.isValid(pieces, P)) {
+                    boardDisplay.setText(Puzzle.errorMsg(pieces, P));
+                    return;
+                }
                 solvePuzzle();
             } catch (FileNotFoundException e) {
                 boardDisplay.setText("File not found!");
