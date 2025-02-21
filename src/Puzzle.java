@@ -125,13 +125,19 @@ public class Puzzle {
         if (size == P) {
             return true;
         }
+        return false;
+    }
+
+    public static String errorMsg(List<Piece> inputpiece, int P) {
+        String err;
+        int size = inputpiece.size();
         if (size < P){
-            System.out.println(P + " pieces are required but only " + size + " is given.");
+            err = P + " pieces are required but only " + size + " is given.";
         }
         else{
-            System.out.println("Pieces out of bounds. Only " + P + " pieces required but " + size + " is given.");
+            err = "Pieces out of bounds. Only " + P + " pieces required but " + size + " is given.";
         }
-        return false;
+        return err;
     }
 
     public static void main(String[] args) {
