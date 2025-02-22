@@ -1,5 +1,4 @@
 import java.util.*;
-import java.io.*;
 
 class Piece {
     private char id;
@@ -138,31 +137,5 @@ public class Puzzle {
             err = "Pieces out of bounds. Only " + P + " pieces required but " + size + " is given.";
         }
         return err;
-    }
-
-    public static void main(String[] args) {
-        String fileName = "./test/shape.txt"; // File path
-        List<String> inputLines = new ArrayList<>();
-
-        try (Scanner scanner = new Scanner(new File(fileName))) {
-            while (scanner.hasNextLine()) {
-                inputLines.add(scanner.nextLine());
-            }
-        } catch (FileNotFoundException e) {
-            System.err.println("File not found: " + e.getMessage());
-            return;
-        }
-
-        List<Piece> pieces = parsePieces(inputLines);
-
-        for (Piece piece : pieces) {
-            piece.printPiece();
-            System.out.println("Rotated 90°:");
-            piece.rotate90().printPiece();
-            System.out.println("Rotated 180°:");
-            piece.rotate90().rotate90().printPiece();
-            System.out.println("Rotated 270°:");
-            piece.rotate90().rotate90().rotate90().printPiece();
-        }
     }
 }

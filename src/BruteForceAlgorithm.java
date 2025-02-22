@@ -1,5 +1,4 @@
 import java.util.*;
-import java.io.*;
 
 public class BruteForceAlgorithm {
     private Board board;
@@ -88,42 +87,5 @@ public class BruteForceAlgorithm {
 
     public void printSolution() {
         board.printBoard();
-    }
-
-    public static void main(String[] args) {
-        Board board = new Board();
-        board.genBoard(5, 5);
-
-        String fileName = "./test/shape.txt"; // test filepath
-        List<String> inputLines = new ArrayList<>();
-
-        try (Scanner scanner = new Scanner(new File(fileName))) {
-            while (scanner.hasNextLine()) {
-                inputLines.add(scanner.nextLine());
-            }
-        } catch (FileNotFoundException e) {
-            System.err.println("File not found: " + e.getMessage());
-            return;
-        }
-
-        List<Piece> pieces = Puzzle.parsePieces(inputLines);
-        BruteForceAlgorithm solver = new BruteForceAlgorithm(board, pieces);
-
-        long startTime = System.nanoTime();
-        
-        boolean solutionFound = solver.solve(0);
-
-        long endTime = System.nanoTime();
-        double elapsedTimeMs = (endTime - startTime) / 1_000_000.0; // Convert to milliseconds
-
-        if (solutionFound) {
-            System.out.println("Solution found:");
-            solver.printSolution();
-        } else {
-            System.out.println("No solution found.");
-        }
-
-        System.out.println("Total possibilities visited: " + solver.visited);
-        System.out.printf("Time taken: %.3f ms\n", elapsedTimeMs);
     }
 }
