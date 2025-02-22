@@ -29,6 +29,7 @@ public class Main extends Application {
     private Board board;
     private List<Piece> pieces;
     private Canvas canvas;
+    private static File lastDirectory = null;
     
     @Override
     public void start(Stage primaryStage) {
@@ -71,9 +72,17 @@ public class Main extends Application {
     private void loadPuzzleFile(Stage stage) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Puzzle File");
+
+        if (lastDirectory != null && lastDirectory.exists()) {
+            fileChooser.setInitialDirectory(lastDirectory);
+        }
+
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+
         File file = fileChooser.showOpenDialog(stage);
         
         if (file != null) {
+            lastDirectory = file.getParentFile();
             try (Scanner scanner = new Scanner(file)) {
                 int height = scanner.nextInt();
                 int width = scanner.nextInt();
@@ -104,6 +113,11 @@ public class Main extends Application {
     private void saveFile(Stage stage, Canvas canvas) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save Solution File");
+
+        if (lastDirectory != null && lastDirectory.exists()) {
+            fileChooser.setInitialDirectory(lastDirectory);
+        }
+
         FileChooser.ExtensionFilter pngFilter = new FileChooser.ExtensionFilter("PNG Image (*.png)", "*.png");
         FileChooser.ExtensionFilter txtFilter = new FileChooser.ExtensionFilter("Text File (*.txt)", "*.txt");
         fileChooser.getExtensionFilters().addAll(pngFilter, txtFilter);
@@ -111,6 +125,7 @@ public class Main extends Application {
         File file = fileChooser.showSaveDialog(stage);
         
         if (file != null) {
+            lastDirectory = file.getParentFile();
             String extension = getFileExtension(file);
 
             if ("png".equalsIgnoreCase(extension)) {
@@ -221,11 +236,10 @@ public class Main extends Application {
     }
 
     private void drawNoSolutionBoard() {
+        canvas.setVisible(true);
         GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.setFill(Color.WHITE);
-        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         gc.setFill(Color.RED);
-        gc.setFont(javafx.scene.text.Font.font("Arial", 720));
+        gc.setFont(javafx.scene.text.Font.font("Arial", 72));
         gc.fillText("X", canvas.getWidth() / 2 - 20, canvas.getHeight() / 2);
     }
 
