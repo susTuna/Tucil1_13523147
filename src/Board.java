@@ -76,11 +76,4 @@ public class Board {
             default:  return "\u001B[37m"; // White
         }
     }
-    
-    public static void main(String[] args) {
-        Board board = new Board();
-        board.genBoard(5, 5);
-        board.printBoard();
-    }
-
 }
