@@ -82,6 +82,7 @@ public class Main extends Application {
         File file = fileChooser.showOpenDialog(stage);
         
         if (file != null) {
+            clearBoard();
             lastDirectory = file.getParentFile();
             try (Scanner scanner = new Scanner(file)) {
                 int height = scanner.nextInt();
@@ -202,6 +203,11 @@ public class Main extends Application {
             sb.append("\n");
         }
         return sb.toString();
+    }
+
+    private void clearBoard(){
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
     private void drawBoard() {
