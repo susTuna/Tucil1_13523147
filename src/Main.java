@@ -178,10 +178,10 @@ public class Main extends Application {
 
     private void solvePuzzle() {
         BruteForceAlgorithm solver = new BruteForceAlgorithm(board, pieces);
-        long startTime = System.nanoTime();
+        long startTime = System.currentTimeMillis();
         boolean solutionFound = solver.solve(0);
-        long endTime = System.nanoTime();
-        double elapsedTimeMs = (endTime - startTime) / 1_000_000.0;
+        long endTime = System.currentTimeMillis();
+        long elapsedTimeMs = (endTime - startTime);
 
         if (solutionFound && board.isSolutionValid()) {
             boardDisplay.setText("Solution found.");
